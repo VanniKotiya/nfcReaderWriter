@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String Write_Error ="Error while adding the Item";
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
-    IntentFilter writingTagFilters[];
+    IntentFilter[] writingTagFilters;
     boolean writeMode;
     Tag myTag;
     Context context;
@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-            editMessage = (TextView) findViewById(R.id.editMessage);
-            nfcContent = (TextView) findViewById(R.id.nfcContent);
-            activateButton = (Button) findViewById(R.id.activateButton);
+            editMessage = findViewById(R.id.editMessage);
+            nfcContent = findViewById(R.id.nfcContent);
+            activateButton = findViewById(R.id.activateButton);
             context = this;
 
                 activateButton.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
             readFromIntent(getIntent());
-            pendingIntent = PendingIntent.getActivity(this,0,new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),0);
+            pendingIntent = PendingIntent.getActivity(this,0,new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),0);
             IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
             tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
             writingTagFilters = new IntentFilter[] {tagDetected};
